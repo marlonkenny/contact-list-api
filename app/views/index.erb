@@ -22,6 +22,7 @@
               <th>Phone Number</th>
               <th>Date Added</th>
               <th>Edit</th>
+              <th>Delete</th>
             </tr>
           </thead>
         </table>
@@ -52,18 +53,29 @@
       </div>
     </div>
     <!-- API Doc -->
-    <div class="tab-pane" id="api-doc">
-    <h2>Contacts API</h2>
-    <p>The contacts api allows you to create, retrieve, update, and delete contacts.</p>
-    <h3>Endpoints</h3>
-    <p>
-      <ul>
-        <li>POST /contacts</li>
-        <li>GET /contacts</li>
-        <li>PUT /contacts/{id}</li>
-        <li>DELETE /contacts/{id}</li>    
-      </ul>
-    </p>
+    <div class="tab-pane container-fluid" id="api-doc">
+      <h2>Contacts API</h2>
+      <p>The contacts api allows you to create, retrieve, update, and delete contacts.</p>
+      <h3>Endpoints</h3>
+      <p>
+        <ul>
+          <li>POST /contacts</li>
+          <li>GET /contacts</li>
+          <li>PUT /contacts/{id}</li>
+          <li>DELETE /contacts/{id}</li>    
+        </ul>
+      </p>
+      <hr>
+      <h3>Create a contact <small>POST /contacts</small></h3>
+      <p>
+        Params:
+        <ul>
+          <li>first_name (required)</li>
+          <li>last_name (required)</li>
+          <li>email</li>
+          <li>phone_number</li>
+        </ul>
+      </p>
     </div>
   </div>
   <!-- Edit form -->
@@ -72,7 +84,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <h4 class="modal-title">Modal title</h4>
+          <h4 class="modal-title">Edit Contact</h4>
         </div>
         <form action="#" id="edit-contact" role="form">
           <div class="modal-body">

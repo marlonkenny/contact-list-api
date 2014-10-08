@@ -33,8 +33,17 @@ put '/contacts/:id' do
   end
 end
 
+delete '/contacts/:id' do
+  contact = Contact.find(params[:id])
+  if contact.destroy
+    [200, {}, '']
+  else
+    [400, {}, contact.errors.messages.to_json]
+  end
+end
+
 # GET /contacts
 get '/contacts' do
-  @contacts = Contact.all
-  json data: @contacts
+  contacts = Contact.all
+  json data: contacts
 end

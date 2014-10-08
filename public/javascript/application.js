@@ -13,26 +13,31 @@ $(function() {
       { "data": "email" },
       { "data": "phone_number" },
       { "data": "created_at" },
-      { "data": null, "defaultContent": "<button class='btn btn-primary edit-button'>Edit</button>"}
+      { "data": null, "defaultContent": "<button class='btn btn-primary edit-button'>Edit</button>"},
+      { "data": null, "defaultContent": "<button class='btn btn-danger delete-button'>Delete</button>"}
     ]
   });
 
-  function validateForm(data) {
-    $(this).find('#contact-submit').button('loading')
-    console.log('about to send with:' + data);
+  // Add listeners to buttons after table loads
+  function tableReady() {
+    $('.edit-button').on('click', editContact);
+    $('.delete-button').on('click', deleteContact);
   };
 
+  function validateForm(data) {
+    $(this).find('#contact-submit').button('loading')
+  };
+
+  //Create Contact
   function handleErrors(thrownError) {
-    console.log(thrownError.responseText);
-    console.log(typeof thrownError.responseText);
     var errors=eval("("+thrownError.responseText+")");
-    console.log(typeof errors);
     $.each(errors, function(key, value){
       input = $('#create-contact').find('#' + key);
       if (input) {
+        name = input.closest('.form-group').find('label').text();
         var form_group = input.closest('.form-group');
         form_group.addClass('has-error');
-        $("<span>").addClass('help-block').text("Error: " + value).appendTo(form_group);
+        $("<span>").addClass('help-block').text("Error: " + name + " " + value).appendTo(form_group);
       }
     });
   };
@@ -51,16 +56,11 @@ $(function() {
       error: handleErrors
     });
   });
-
-  function tableReady() {
-    $('.edit-button').on('click', editContact);
-  };
-
+  
+  // Edit Contact
   function editContact() {
-    console.log('Editing!');
     table = $('#contacts').dataTable();
     data = table.fnGetData($(this).parents('tr')[0]);
-    console.log(data);
     $('#edit-contact').find('#first_name').val(data.first_name);
     $('#edit-contact').find('#last_name').val(data.last_name);
     $('#edit-contact').find('#email').val(data.email);
@@ -79,6 +79,16 @@ $(function() {
         success: formSuccess,
         error: handleErrors
       });
+    });
+  };
+
+  // Delete Contact
+  function deleteContact() {
+    table = $('#contacts').dataTable();
+    data = table.fnGetData($(this).parents('tr')[0]);
+    action = '/contacts/' + data.id
+    $.ajax({
+      type: 'delete', url: action, data: data, success: formSuccess
     });
   };
 });
