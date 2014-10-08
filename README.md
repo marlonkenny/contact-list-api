@@ -1,9 +1,7 @@
-Sinatra
+Contact List API
 =============
 
-Brought to you by Lighthouse Labs
-
-## Getting Started
+A contact list API powered by Sinatra.
 
 1. `bundle install`
 2. `shotgun -p 3000 -o 0.0.0.0`
