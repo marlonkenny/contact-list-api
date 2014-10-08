@@ -5,13 +5,15 @@ $(function() {
       "type":     "GET",
       "dataType": "json"
     },
+    "initComplete": tableReady,
     "columns": [
-            { "data": "id" },
-            { "data": "first_name" },
-            { "data": "last_name" },
-            { "data": "email" },
-            { "data": "phone_number" },
-            { "data": "created_at" }
+      { "data": "id" },
+      { "data": "first_name" },
+      { "data": "last_name" },
+      { "data": "email" },
+      { "data": "phone_number" },
+      { "data": "created_at" },
+      { "data": null, "defaultContent": "<button class='btn btn-primary edit-button'>Edit</button>"}
     ]
   });
 
@@ -26,7 +28,7 @@ $(function() {
     var errors=eval("("+thrownError.responseText+")");
     console.log(typeof errors);
     $.each(errors, function(key, value){
-      input = $('#' + key);
+      input = $('#create-contact').find('#' + key);
       if (input) {
         var form_group = input.closest('.form-group');
         form_group.addClass('has-error');
@@ -49,4 +51,16 @@ $(function() {
       error: handleErrors
     });
   });
+
+  function tableReady() {
+    $('.edit-button').on('click', editContact);
+  };
+
+  function editContact() {
+    console.log('Editing!');
+    table = $('#contacts').dataTable();
+    data = table.fnGetData($(this).parents('tr')[0]);
+    console.log(data);
+    $('#edit-modal').modal('show');
+  };
 });
