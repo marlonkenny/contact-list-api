@@ -61,6 +61,24 @@ $(function() {
     table = $('#contacts').dataTable();
     data = table.fnGetData($(this).parents('tr')[0]);
     console.log(data);
+    $('#edit-contact').find('#first_name').val(data.first_name);
+    $('#edit-contact').find('#last_name').val(data.last_name);
+    $('#edit-contact').find('#email').val(data.email);
+    $('#edit-contact').find('#phone_number').val(data.phone_number);
+    $('#edit-contact').find('#id').val(data.id);
+
     $('#edit-modal').modal('show');
+
+    $('#edit-contact').on('submit', function(event){
+      action = '/contacts/' + data.id
+      event.preventDefault();
+      formData = $(this).serialize()
+      $.ajax({
+        type: 'put', url: action, data: formData,
+        before: validateForm,
+        success: formSuccess,
+        error: handleErrors
+      });
+    });
   };
 });

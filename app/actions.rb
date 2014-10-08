@@ -20,8 +20,17 @@ end
 
 # PUT /contact/:id 
 put '/contacts/:id' do
-  content_type :json
-  { :key1 => 'value1', :key2 => 'value2' }.to_json
+  contact = Contact.find(params[:id])
+  if contact.update(
+    first_name:   params[:first_name],
+    last_name:    params[:last_name],
+    email:        params[:email],
+    phone_number: params[:phone_number]
+    )
+    [200, {}, '']
+  else
+    [400, {}, contact.errors.messages.to_json]
+  end
 end
 
 # GET /contacts
