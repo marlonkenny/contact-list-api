@@ -9,7 +9,7 @@ require 'sinatra/activerecord'
 require 'sinatra/json'
 require 'sinatra/cross_origin'
 
-require 'pry'
+require 'pry' if development?
 require 'json'
 
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
