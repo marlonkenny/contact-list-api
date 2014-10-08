@@ -4,6 +4,7 @@
       <a class="navbar-brand">Contacts!</a>
       <li class="active"><a href="#contact-list" data-toggle="tab">All Contacts</a></li>
       <li><a href="#create" data-toggle="tab">Create a Contact</a></li>
+      <li><a href="#api-doc" data-toggle="tab">API Doc</a></li>
     </ul>
   </nav>
   <br/>
@@ -49,6 +50,20 @@
           <input type="submit" class="btn btn-success" id="contact-submit" value="Create!">
         </form>
       </div>
+    </div>
+    <!-- API Doc -->
+    <div class="tab-pane" id="api-doc">
+    <h2>Contacts API</h2>
+    <p>The contacts api allows you to create, retrieve, update, and delete contacts.</p>
+    <h3>Endpoints</h3>
+    <p>
+      <ul>
+        <li>POST /contacts</li>
+        <li>GET /contacts</li>
+        <li>PUT /contacts/{id}</li>
+        <li>DELETE /contacts/{id}</li>    
+      </ul>
+    </p>
     </div>
   </div>
   <!-- Edit form -->
