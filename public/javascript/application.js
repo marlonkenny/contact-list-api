@@ -7,7 +7,6 @@ $(function() {
     },
     "initComplete": tableReady,
     "columns": [
-      { "data": "id" },
       { "data": "first_name" },
       { "data": "last_name" },
       { "data": "email" },
