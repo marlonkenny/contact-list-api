@@ -21,15 +21,15 @@ $(function() {
   function tableReady() {
     $('.edit-button').on('click', editContact);
     $('.delete-button').on('click', deleteContact);
-  };
+  }
 
   function validateForm(data) {
-    $(this).find('#contact-submit').button('loading')
-  };
+    $(this).find('#contact-submit').button('loading');
+  }
 
   //Create Contact
   function handleErrors(thrownError) {
-    var errors=eval("("+thrownError.responseText+")");
+    var errors = eval("("+thrownError.responseText+")");
     $.each(errors, function(key, value){
       input = $('#create-contact').find('#' + key);
       if (input) {
@@ -39,15 +39,15 @@ $(function() {
         $("<span>").addClass('help-block').text("Error: " + name + " " + value).appendTo(form_group);
       }
     });
-  };
+  }
 
   function formSuccess() {
     window.location.reload(true);
-  };
+  }
 
   $('#create-contact').on('submit', function(event){
     event.preventDefault();
-    formData = $(this).serialize()
+    formData = $(this).serialize();
     $.ajax({
       type: 'post', url: '/contacts', data: formData,
       before: validateForm,
@@ -69,9 +69,9 @@ $(function() {
     $('#edit-modal').modal('show');
 
     $('#edit-contact').on('submit', function(event){
-      action = '/contacts/' + data.id
+      action = '/contacts/' + data.id;
       event.preventDefault();
-      formData = $(this).serialize()
+      formData = $(this).serialize();
       $.ajax({
         type: 'put', url: action, data: formData,
         before: validateForm,
@@ -79,15 +79,15 @@ $(function() {
         error: handleErrors
       });
     });
-  };
+  }
 
   // Delete Contact
   function deleteContact() {
     table = $('#contacts').dataTable();
     data = table.fnGetData($(this).parents('tr')[0]);
-    action = '/contacts/' + data.id
+    action = '/contacts/' + data.id;
     $.ajax({
       type: 'delete', url: action, data: data, success: formSuccess
     });
-  };
+  }
 });
