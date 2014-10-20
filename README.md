@@ -22,7 +22,7 @@ The contacts api allows you to create, retrieve, update, and delete contacts.
 
 ### Create a contact <small>POST /contacts</small>
 
-        Params:
+Params:
 
 *   first_name (required)
 *   last_name (required)
@@ -31,7 +31,7 @@ The contacts api allows you to create, retrieve, update, and delete contacts.
 
 ### Edit a contact <small>PUT /contacts/:id</small>
 
-        Params:
+Params:
 
 *   first_name
 *   last_name
@@ -40,8 +40,8 @@ The contacts api allows you to create, retrieve, update, and delete contacts.
 
 ### Delete a contact <small>DELETE /contacts/:id</small>
 
-        No params required.
+No params required.
 
 ### Retrieve all contacts <small>GET /contacts</small>
 
-        No params required.
+No params required.
